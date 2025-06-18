@@ -3,7 +3,6 @@ import random
 from datetime import datetime, timedelta
 import time
 import re
-
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import PromptTemplate
 from langchain.chains import LLMChain
@@ -11,7 +10,7 @@ from langchain.chains import LLMChain
 model = ChatGoogleGenerativeAI(
     google_api_key="AIzaSyDuNe3K1AABInkX9xFzFPMRJe90WD0q10s",
     model="gemini-1.5-flash",
-    temperature=0.9, # Increased temperature for more diversity
+    temperature=0.9,
 )
 
 OUTPUT_FILE_NAME = "./data/generated_tickets.txt"
@@ -85,7 +84,6 @@ def generate_tickets():
                     if tickets_generated_count >= NUMBER_OF_TICKETS_TO_GENERATE:
                         break
 
-                    # Robust regex: uses non-greedy (.+?) and allows zero or more spaces after "Created:"
                     match = re.match(r"Ticket #(\d{5}): (.+?) - Status: (.+?) - Created: *(\d{4}-\d{2}-\d{2})", line)
                     
                     if match:
@@ -106,7 +104,6 @@ def generate_tickets():
                             
                         generated_ids.add(final_id_to_write)
                         
-                        # Reconstruct the line with the GUARANTEED correct format (with the space)
                         final_line = f"Ticket #{final_id_to_write}: {description} - Status: {status} - Created: {created_date}"
                         f.write(final_line + "\n")
                         tickets_generated_count += 1
@@ -127,8 +124,10 @@ def generate_tickets():
                 time.sleep(5)
 
     print(f"\nFinished generating tickets. Total tickets written: {tickets_generated_count}")
+    
     if tickets_generated_count < NUMBER_OF_TICKETS_TO_GENERATE:
         print(f"Note: Did not reach target of {NUMBER_OF_TICKETS_TO_GENERATE} tickets due to errors or LLM not producing enough lines per request.")
+
     print(f"Check '{OUTPUT_FILE_NAME}' for your generated data.")
 
 if __name__ == "__main__":

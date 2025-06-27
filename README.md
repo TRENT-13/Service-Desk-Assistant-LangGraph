@@ -29,7 +29,7 @@ A comprehensive AI-powered service desk assistant built with LangChain, Google G
 - **Statistical Reporting**: Mean, median, percentile analysis
 - **Visual Analytics**: Automated performance plots and charts
 
-## 🛠Technology Stack
+## Technology Stack
 
 - **AI/ML**: Google Gemini 2.0 Flash, LangChain, HuggingFace Transformers
 - **Vector Database**: FAISS (Facebook AI Similarity Search)
@@ -96,15 +96,16 @@ run_llm()
 ## Project Structure
 
 ```
-service-desk-assistant/
+smart-customer-service-rag-assistant/
 ├── data/
-│   ├── generated_tickets.txt    # Ticket storage
-│   ├── policies.txt            # Policy documents
-│   ├── product_data.txt        # Product information
-│   └── chat_history.txt        # Conversation history
-├── benchmark_results/          # Performance analysis output
-├── main.py                     # Core application logic
-└── README.md                   # This file
+│   ├── tickets.txt                                                 # Ticket storage
+│   ├── generated_tickets.txt                                       # Generated ticket storage
+│   ├── policies.txt                                                # Policy documents
+│   ├── product_data.txt                                            # Product information
+├── benchmark_results/                                              # Performance analysis output
+├── smart_customer_service_rag_assistant.ipynb                      # Core application logic
+├── generate_data.py                                                # Data generation
+└── README.md                                                       # This file
 ```
 
 ## Core Components

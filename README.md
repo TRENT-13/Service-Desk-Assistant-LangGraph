@@ -217,3 +217,4 @@ Supports searching across different data types:
 - **LangChain** for the comprehensive AI framework
 - **FAISS** for efficient vector similarity search
 - **HuggingFace** for transformer models and embeddings
+one with file t. is for final result. second one is for testing

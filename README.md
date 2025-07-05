@@ -1,3 +1,4 @@
+**The file with the MAIN suffix is intended for testing**
 # Smart Customer Service RAG Assistant
 
 A sophisticated, conversational AI assistant for customer service and service desk tasks, built with advanced RAG (Retrieval-Augmented Generation) architecture and agentic workflows.

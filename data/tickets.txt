@@ -11,3 +11,4 @@ Ticket #10010: Network safety - Status: New - Created: 2025-05-26
 Ticket #10011: My internet is too slow. - Status: New - Created: 2025-06-18
 Ticket #10012: add ticket about the network problem, status is ongoing - Status: New - Created: 2025-07-03
 Ticket #10013: My keyboard is not working. - Status: New - Created: 2025-07-05
+Ticket #10014: There are ram issues. - Status: New - Created: 2025-07-05

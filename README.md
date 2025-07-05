@@ -1,225 +1,199 @@
-**The notebook I have presented is the one lsat word with MAIN***
+# Smart Customer Service RAG Assistant
 
-# Service Desk Assistant with RAG System
+A sophisticated, conversational AI assistant for customer service and service desk tasks, built with advanced RAG (Retrieval-Augmented Generation) architecture and agentic workflows.
 
-A comprehensive AI-powered service desk assistant built with LangChain, Google Gemini, and FAISS vector search. This system provides intelligent ticket management, contextual information retrieval, and automated support with built-in hallucination detection and performance benchmarking.
+![LangGraph Workflow](langgraph_diagram_3.png)
 
-## Features
+## 🌟 Overview
 
-### Intelligent Ticket Management
-- **Create Tickets**: Automatically generate support tickets with unique IDs and timestamps
-- **Update Status**: Modify ticket status (New, Pending, Investigating, Resolved)
-- **Search by ID**: Find specific tickets using ticket numbers
-- **Search by Description**: Semantic search through ticket descriptions
-- **Date Range Queries**: Filter tickets by creation date ranges
-- **Create Event**: creates events
-- **Search event**:
-- 
+This project implements an intelligent customer service assistant that combines the power of large language models with a robust retrieval system. The assistant can understand user intent, interact with knowledge bases, manage support tickets, schedule events, and perform self-correction to provide accurate and relevant responses.
 
-### Advanced AI Capabilities
-- **Intent Classification**: Automatically categorizes user queries for optimal routing
-- **Query Expansion**: Enhances search queries with synonyms and related terms
-- **Hallucination Detection**: Validates AI responses for accuracy and relevance
-- **Context-Aware Responses**: Retrieves relevant information from knowledge base
+## 🚀 Key Features
 
-### RAG (Retrieval-Augmented Generation) System
-- **Vector Search**: FAISS-powered semantic search across tickets and documents
-- **Multi-Modal Knowledge Base**: Supports tickets, policies, and product information
-- **Similarity Thresholding**: Configurable relevance filtering
-- **Document Chunking**: Intelligent text splitting for optimal retrieval
+### **Conversational AI**
+- Natural language interface for seamless user interaction
+- Context-aware conversations with memory retention
+- Personalized responses based on conversation history
 
-### Performance Benchmarking
-- **Response Time Analysis**: Comprehensive performance metrics
-- **Success Rate Monitoring**: Track system accuracy and reliability
-- **Statistical Reporting**: Mean, median, percentile analysis
-- **Visual Analytics**: Automated performance plots and charts
+### **RAG Architecture**
+- Grounds responses in factual data from multiple sources
+- Retrieves relevant information from tickets, product info, policies, and calendar
+- Uses FAISS vector store for efficient similarity search
 
-## Technology Stack
+### **Agentic Workflow with LangGraph**
+- State-driven workflow managed by LangGraph
+- Intelligent routing through various stages
+- Complex multi-step reasoning capabilities
 
-- **AI/ML**: Google Gemini 2.0 Flash, LangChain, HuggingFace Transformers
-- **Vector Database**: FAISS (Facebook AI Similarity Search)
-- **Embeddings**: Sentence Transformers (all-mpnet-base-v2)
-- **Memory Management**: Conversation buffer with sliding window
-- **Data Processing**: Pandas, NumPy, Matplotlib
-- **File Management**: Text-based storage with automatic persistence
+### **Multi-Tool Capability**
+- **Ticket Management**: Create, update, and query support tickets
+- **Calendar Management**: Schedule events and find available time slots
+- **Knowledge Retrieval**: Search through documentation and policies
 
-## Prerequisites
+### **Self-Correction & Refinement**
+- **Query Expansion**: Rewrites queries to improve search recall
+- **Input Validation**: Verifies ticket creation requests
+- **Hallucination Detection**: Ensures response relevance and accuracy
+- **Conflict Resolution**: Detects scheduling conflicts and suggests alternatives
 
-```bash
-pip install langchain
-pip install langchain-openai
-pip install langchain-google-genai
-pip install langchain-community
-pip install faiss-cpu
-pip install sentence-transformers
-pip install matplotlib
-pip install numpy
-pip install python-dateutil
+## 🏛️ Architecture & Workflow
+
+The assistant's logic is orchestrated by a LangGraph state machine that defines possible states and transitions, enabling complex, multi-step reasoning and robust self-correction loops.
+
+### Typical Workflow:
+1. **Human Input**: Process user queries
+2. **Intent Classification**: Categorize user intent (ticket_creation, event_information_retrieval, etc.)
+3. **Conditional Routing**: Route requests to appropriate processing paths
+4. **Agent & Tool Execution**: Execute relevant tools using autonomous agent
+5. **Response Generation**: Formulate initial answers
+6. **Hallucination Detection**: Validate generated answers
+7. **Final Answer**: Present verified responses to users
+
+## 🛠️ Core Components
+
+### 1. RAGDocStore
+Manages the knowledge base with separate FAISS vector stores:
+- `ticket_store`: Support tickets
+- `calendar_store`: Scheduled events  
+- `policy_store`: Company policies
+- `information_store`: Product data and general information
+
+### 2. Tools
+- **TicketTool**: Create, update, and query tickets
+- **CalendarTool**: Schedule events and manage calendar conflicts
+- **Knowledge Tools**: Search through documentation and policies
+
+### 3. LangGraph State Machine
+Central controller with nodes (functions) and edges (flow direction) that provides:
+- Advanced reasoning capabilities
+- Intelligent routing
+- Self-correction loops
+
+## ⚙️ Getting Started
+
+### Prerequisites
+- Python 3.9+
+- Google AI API key (for Gemini model)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd <repository-directory>
+   ```
+
+2. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+### Required Dependencies
+```txt
+langchain
+langgraph
+langchain-google-genai
+langchain-openai
+langchain-community
+faiss-cpu
+sentence-transformers
+numpy
+python-dateutil
+ipython
+warnings
 ```
 
-## Quick Start
+### Configuration
 
-### 1. Environment Setup
+#### API Key Setup
+**⚠️ Important**: Replace the placeholder API key with your actual Google AI API key.
 
 ```python
-# Set your Google API key
-google_api_key="your-google-api-key-here"
-```
+# Recommended approach - use environment variables
+import os
+google_api_key = os.environ.get("GOOGLE_API_KEY")
 
-### 2. Initialize the System
-
-```python
-from your_module import setup_docstore, create_agent, run_llm
-
-# Initialize document store and agent
-docstore = setup_docstore("generated_tickets.txt", "./data/generated_tickets.txt")
-agent = create_agent()
-
-# Start interactive session
-run_llm()
-```
-
-### 3. Basic Usage Examples
-
-```bash
-# Create a new ticket
-> I need to report a printer issue - the office printer is not responding
-
-# Search for tickets
-> Show me all tickets about network problems
-
-# Update ticket status
-> Change ticket 10001 to Resolved
-
-# Find specific ticket
-> What's the status of ticket 10001?
-
-# Date range search
-> Show me tickets from 2024-01-01 to 2024-01-31
-```
-
-## Project Structure
-
-```
-smart-customer-service-rag-assistant/
-├── data/
-│   ├── tickets.txt                                                 # Ticket storage
-│   ├── generated_tickets.txt                                       # Generated ticket storage
-│   ├── policies.txt                                                # Policy documents
-│   ├── product_data.txt                                            # Product information
-├── benchmark_results/                                              # Performance analysis output
-├── smart_customer_service_rag_assistant.ipynb                      # Core application logic
-├── generate_data.py                                                # Data generation
-└── README.md                                                       # This file
-```
-
-## Core Components
-
-### RAGDocStore
-Manages vector-based document storage and retrieval:
-- **Ticket Store**: Semantic search through support tickets
-- **Policy Store**: Company policies and procedures
-- **Information Store**: Product documentation and guides
-
-### TicketTool
-Handles all ticket-related operations:
-- Auto-incrementing ticket IDs
-- Status management
-- Multi-criteria search capabilities
-- Date range filtering
-
-### Intent Classification
-Automatically routes queries to appropriate handlers:
-- `ticket_creation`: New ticket requests
-- `ticket_information_retrieval`: Search and status queries
-- `ticket_status_change`: Status update requests
-- `general_inquiry`: Open-ended questions
-
-### Hallucination Detection
-Validates AI responses using a secondary verification step:
-- Compares generated answers against original queries
-- Handles temporal query validation
-- Provides confidence scoring for responses
-
-## Benchmarking System
-
-Run performance analysis with built-in benchmarking tools:
-
-```python
-from your_module import run_benchmark_suite
-
-# Execute comprehensive benchmark
-benchmark = run_benchmark_suite(docstore, ticket_tool, context_tool, agent)
-```
-
-### Benchmark Metrics
-- **Response Time Analysis**: Mean, median, percentiles
-- **Success Rate Tracking**: Query resolution accuracy
-- **Error Monitoring**: Exception tracking and analysis
-- **Search Performance**: Relevance and speed metrics
-
-##  Configuration
-
-### Vector Search Parameters
-```python
-# Similarity threshold for ticket search
-threshold = 1.35  # Lower = more strict matching
-
-# Embedding model configuration
-embeddings = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-mpnet-base-v2",
-    model_kwargs={'device': 'cpu'}
+model = ChatGoogleGenerativeAI(
+    model=model_name2,
+    google_api_key=google_api_key,
+    # ...
 )
 ```
 
-### Memory Management
-```python
-# Conversation buffer size
-memory = ConversationBufferWindowMemory(
-    k=10,  # Remember last 10 interactions
-    memory_key="chat_history",
-    return_messages=True
-)
+#### Data Files
+The application automatically creates a `data/` directory with necessary files:
+- `data/tickets.txt`: Support tickets storage
+- `data/calendar.txt`: Calendar events storage
+- `data/policies.txt`: Company policy documents
+- `data/product_data.txt`: Product information
+
+You can pre-populate these files with your own data to enhance the assistant's knowledge base.
+
+## 🚀 Running the Assistant
+
+1. Open `smart_customer_service_rag_assistant_rt_MAIN.ipynb` in Jupyter
+2. Run all cells from top to bottom
+3. The final cell executes `run_llm()` to start the interactive interface
+4. Type queries when prompted with `>`
+5. Exit by typing `quit`, `exit`, or `q`
+
+## 💡 Usage Example
+
+```
+SCSR Assistant
+----------------------------
+> hello my name bob, what day is today?
+Processing your request...
+
+> Entering new AgentExecutor chain...
+The user is asking for today's date. I should use the CheckCurrentDate tool to get this information.
+Action: CheckCurrentDate
+Action Input: _=''
+Observation: 2025-07-05
+Thought: I have successfully retrieved today's date.
+Final Answer: Today's date is 2025-07-05.
+
+> Finished chain.
+Today's date is 2025-07-05.
+
+> what is my name?
+Processing your request...
+
+> Entering new AgentExecutor chain...
+The user is asking for their name. The previous turn established that their name is Bob. I can directly answer this question.
+Final Answer: Your name is Bob.
+
+> Finished chain.
+Your name is Bob.
+
+> quit
+Processing your request...
+Thank you for using SCSR Assistant. Goodbye!
 ```
 
-## Advanced Features
+## 🔧 Key Capabilities
 
-### Custom Query Expansion
-The system automatically expands search queries with related terms:
-```python
-# Input: "printer problem"
-# Expanded: "printer issue, printing malfunction, printer offline, print queue stuck, printer driver error..."
-```
+- **Intelligent Ticket Management**: Create, update, and search support tickets
+- **Smart Calendar Integration**: Schedule events with conflict detection
+- **Knowledge Base Search**: Query policies, documentation, and product information
+- **Conversational Memory**: Maintain context across multiple interactions
+- **Self-Validation**: Detect and correct potential response errors
+- **Multi-Modal Search**: Search by ID, date, description, or keywords
 
-### Intelligent Ticket Validation
-Prevents invalid ticket creation with built-in validation:
-- Filters out personal/non-work related issues
-- Validates technical problem descriptions
-- Maintains professional ticket standards
+## 🤝 Contributing
 
-### Multi-Modal Search
-Supports searching across different data types:
-- Historical tickets
-- Policy documents
-- Product information
-- Combined multi-source results
+Contributions are welcome! Please feel free to submit issues, feature requests, or pull requests.
 
-## Performance Optimization
+## 📄 License
 
-### Vector Store Optimization
-- Efficient similarity search with FAISS
-- Configurable similarity thresholds
-- Batch document processing
+[Add your license information here]
 
-### Memory Management
-- Sliding window conversation memory
-- Persistent chat history storage
-- Optimized context retrieval
+## 🙏 Acknowledgments
 
-## Acknowledgments
+- Built with [LangChain](https://langchain.com/) and [LangGraph](https://langgraph.com/)
+- Powered by Google's Gemini AI model
+- Vector search capabilities provided by FAISS
 
-- **Google Gemini** for advanced language model capabilities
-- **LangChain** for the comprehensive AI framework
-- **FAISS** for efficient vector similarity search
-- **HuggingFace** for transformer models and embeddings
-one with file t. is for final result. second one is for testing
+---
+
+*For questions or support, please open an issue in the repository.*

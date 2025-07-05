@@ -22,3 +22,9 @@ Event: Meeting - Date: 2025-08-13 - Time: 11:00 - Location: Unknown Location
 
 
 Event: ufc las noches - Date: 2025-08-13 - Time: 01:00 - Location: mexica
+Event: 'final presentation' - Date: '2025-07-05' - Time: '18:00' - Location: 'G block'
+Event: ufc las noches - Date: 2025-08-14 - Time: 00:00 - Location: mexico
+
+Event: f block - Date: 2025-08-13 - Time: 14:00 - Location: f block\n
+Event: Event - Date: 2025-08-13 - Time: 13:00 - Location: g5\nEvent: final presentation - Date: 2025-08-13 - Time: 15:00 - Location: g5 building\n
+Event: Event - Date: 2025-08-13 - Time: 16:00 - Location: broklyn

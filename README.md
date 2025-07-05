@@ -2,7 +2,7 @@
 
 A sophisticated, conversational AI assistant for customer service and service desk tasks, built with advanced RAG (Retrieval-Augmented Generation) architecture and agentic workflows.
 
-![LangGraph Workflow](langgraph_diagram_3.png)
+![LangGraph Workflow](langgraph_diagram_1.png)
 
 ## 🌟 Overview
 

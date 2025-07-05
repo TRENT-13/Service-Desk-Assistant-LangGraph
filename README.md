@@ -1,3 +1,5 @@
+**The notebook I have presented is the one lsat word with MAIN***
+
 # Service Desk Assistant with RAG System
 
 A comprehensive AI-powered service desk assistant built with LangChain, Google Gemini, and FAISS vector search. This system provides intelligent ticket management, contextual information retrieval, and automated support with built-in hallucination detection and performance benchmarking.
@@ -10,6 +12,9 @@ A comprehensive AI-powered service desk assistant built with LangChain, Google G
 - **Search by ID**: Find specific tickets using ticket numbers
 - **Search by Description**: Semantic search through ticket descriptions
 - **Date Range Queries**: Filter tickets by creation date ranges
+- **Create Event**: creates events
+- **Search event**:
+- 
 
 ### Advanced AI Capabilities
 - **Intent Classification**: Automatically categorizes user queries for optimal routing
